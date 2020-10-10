@@ -10,8 +10,16 @@ let membersOnline = document.querySelector(
     "#top > div.p-body > div > div > div > div.p-body-sidebar > div.uix_sidebarInner > div > div:nth-child(2) > div > div.block-body > div > ul"
 )
 
+/**
+ * @description Global variable which holds all of the blocked users
+ * @global
+ * @type {[String]}
+ */
 let BLOCKED;
 
+/**
+ * @description Watch any shoutbox and events and delets the message whom got blocked
+ */
 function watchShoutbox() 
 {
     const shoutboxLI = shoutboxChat.children;
@@ -42,6 +50,9 @@ function watchShoutbox()
     })
 }
 
+/**
+ * @description Gives the blocked users 
+ */
 function getBlockedUsers() 
 {
     return new Promise((resolve, reject) => {
@@ -51,7 +62,12 @@ function getBlockedUsers()
     })
 }
 
-function getJSONFile(file)
+/**
+ * 
+ * @param {any} file The file
+ * @description Returns the file data according from root (here)
+ */
+function getFile(file)
 {
     return new Promise((resolve, reject) => {
         let URL = chrome.runtime.getURL(file)
@@ -66,6 +82,9 @@ function getJSONFile(file)
     })
 }
 
+/**
+ * @description Removes the block persons from staff page online thingy
+ */
 function removeStaffPage() 
 {
     let staffBlock = staffOnline.children;
@@ -85,6 +104,9 @@ function removeStaffPage()
     }
 }
 
+/**
+ * @description Removes the users who got blocked form online page
+ */
 function removeOnlinePage() 
 {
     let onlinePage = membersOnline.children;
@@ -104,6 +126,9 @@ function removeOnlinePage()
     }
 }
 
+/**
+ * @description Adds a ignore button to tooltip element
+ */
 function ignoreButton()
 {
     let markedDone = [];
@@ -149,12 +174,7 @@ function ignoreButton()
                             });
                         });
                     })
-                    continue;
-                } else {
-                    continue;
                 }
-            } else {
-                console.log("Nope")
             }
         }
     });
