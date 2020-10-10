@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Ignore admin",
+  "version": "0.1.7",
+  "description": "Tolfx personal panda extension kek",
+  "browser_action": {
+    "default_popup": "./popup/main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.panda-community.com/*"],
+      "js": ["./scritps/forum/index.js"]
+    }
+  ],
+  "permissions": [
+		"contextMenus",
+		"webRequest",
+		"webRequestBlocking",
+		"webNavigation",
+		"*://*.panda-community.com/*",
+		"storage",
+		"tabs"
+  ],
+  "background": {
+    "scripts": ["./scripts/background.js"]
+  }
+}
