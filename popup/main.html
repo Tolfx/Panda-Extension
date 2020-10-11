@@ -4,14 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="addAdmin.js"></script>
+    <style>
+        * {
+            padding: 0px;
+            margin: 5px;
+            background-color: #596659;
+        }
+        input {
+            background-color: aliceblue;
+            padding: 5px 10px;
+            border: 2px solid rgba(0, 0, 0, 0.349);
+            border-radius: 10px;
+        }
+
+        input[type=button], input[type=submit], input[type=reset] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .ignoredAdminsList {
+            display: block;
+            position: relative;
+            text-align: center;
+            font-size: 20px;
+            color: floralwhite;
+        }
+
+        .close {
+            background-color: rgba(224, 24, 24, 0.158);
+            cursor: pointer;
+            top: 30%;
+            transform: translate(0%, -50%);
+        } 
+    </style>
 </head>
 <body>
     <!-- Add new values -->
-    <input type="text" id="ignore" value="">
+    <input type="text" id="ignore">
     <input type="button" value="Save" id="saveValue"></input>
 
     <!-- Remove values -->
-    <input type="text" id="removeignore" value="">
+    <input type="text" id="removeignore">
     <input type="button" value="Remove" id="removeValue"></input>
 
     <!-- Print values -->
