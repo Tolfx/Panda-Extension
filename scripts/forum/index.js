@@ -202,6 +202,23 @@ function removePost()
 
 }
 
+function removeLatestProfilePosts() {
+    let blockedUser = BLOCKED;
+    let profilePostsContainer = document.querySelector(
+        "#top > div.p-body > div > div > div > div.p-body-sidebar > div.uix_sidebarInner > div > div:nth-child(6) > div > div"
+    )
+    const childrenOfInner = profilePostsContainer.children;
+
+    for (let i = 1; i < childrenOfInner.length; ++i) 
+    {
+        const ID = childrenOfInner[i].children[0].children[1].children[0].children[0].dataset.userId;
+        if (blockedUser.User.findIndex(user => user === ID) != -1) 
+        {
+            childrenOfInner[i].remove();
+        }
+    }
+}
+
 
 /*
 chrome.storage.sync.set({key: "Test"}, function() {
@@ -216,6 +233,7 @@ const tabURL = location.href;
 if(tabURL === "https://www.panda-community.com/") {
     getBlockedUsers().then(r => {
         BLOCKED = r;
+        removeLatestProfilePosts();
         ignoreButton();
         removeOnlinePage();
         removeStaffPage();
