@@ -9,7 +9,7 @@
   "content_scripts": [
     {
       "matches": ["https://www.panda-community.com/*"],
-      "js": ["./scritps/forum/index.js"]
+      "js": ["/scripts/forum/index.js"]
     }
   ],
   "permissions": [
@@ -22,6 +22,6 @@
 		"tabs"
   ],
   "background": {
-    "scripts": ["./scripts/background.js"]
+    "scripts": ["background.js"]
   }
 }
