@@ -9,7 +9,6 @@ let staffOnline = document.querySelector(
 let membersOnline = document.querySelector(
     "#top > div.p-body > div > div > div > div.p-body-sidebar > div.uix_sidebarInner > div > div:nth-child(2) > div > div.block-body > div > ul"
 )
-
 /**
  * @description Global variable which holds all of the blocked users
  * @global
@@ -182,7 +181,27 @@ function ignoreButton()
     observeToolTop.observe(document.body, {
         childList: true,
     });
+}
 
+function removePost() 
+{   
+    getBlockedUsers().then(r => {
+    BLOCKED = r;
+    let blockedUser = BLOCKED;
+    let innerContainer = document.querySelector(
+        "#top > div.p-body > div > div.uix_contentWrapper > div > div > div > div.block.block--messages > div.block-container.lbContainer"
+    )
+    const childrenOfInner = innerContainer.children[0].children;
+
+    for (let i = 0; i < childrenOfInner.length; ++i) 
+    {
+        const ID = childrenOfInner[i].children[1].children[0].children[0].children[1].children[0].children[0].children[0].attributes[4].value
+        if (blockedUser.User.findIndex(user => user === ID) != -1) 
+        {
+            childrenOfInner[i].remove();
+        }
+    }
+    })
 }
 
 
@@ -204,5 +223,9 @@ if(tabURL === "https://www.panda-community.com/") {
     watchShoutbox();
 } else {
     ignoreButton();
+}
+
+if(tabURL.includes("https://www.panda-community.com/threads/")) {
+    removePost();
 }
 
