@@ -45,8 +45,28 @@ function renderAdmins()  {
         const olElement = document.querySelector('.ignoredAdminsList');
         for(let i = 0; i < admin.length; ++i) {
             let ol = document.createElement('ol')
+            ol.setAttribute("adminID", admin[i])
             ol.innerHTML = admin[i];
             olElement.appendChild(ol);
+            let button = document.createElement("span");
+            button.setAttribute("class", "close")
+            button.innerHTML = "&times;"
+            ol.appendChild(button)
+
+            button.addEventListener("click", (click) => {
+                const adminID = click.path[1].attributes[0].nodeValue;
+                chrome.storage.sync.get({ "User": [] }, (lastStorageArray) => {
+                    const oldValue = lastStorageArray.User;
+            
+                    const index = oldValue.indexOf(adminID);
+                    if(index > -1) {
+                        oldValue.splice(index, 1)
+                        chrome.storage.sync.set({ "User": oldValue }, (d) => {
+                            console.log(`remvoing old value`)
+                        });
+                    }
+                });
+            })
         }
     });
 }
