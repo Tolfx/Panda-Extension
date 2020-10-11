@@ -1,5 +1,5 @@
 let shoutboxChat = document.querySelector(
-  "#top > div.p-body > div > div > div > div.p-body-content > div > div.siropuShoutbox.block > div > div.block-body > ol",
+  "#top > div.p-body > div > div > div > div.p-body-content > div > div.siropuShoutbox.block > div > div.block-body > ol"
 );
 
 let staffOnline = document.querySelector(
@@ -22,16 +22,13 @@ let BLOCKED;
 function watchShoutbox() 
 {
     const shoutboxLI = shoutboxChat.children;
-    getBlockedUsers().then(r => {
-        BLOCKED = r;
-        let blockedUser = BLOCKED;
-        for(let i = 0; i < shoutboxLI.length; ++i) {
-            let userID = shoutboxLI[i].children[1].dataset.userId
-            if(blockedUser.User.findIndex(r => r === userID) != -1) {
-                shoutboxLI[i].innerText = "";
-            }
+    let blockedUser = BLOCKED;
+    for(let i = 0; i < shoutboxLI.length; ++i) {
+        let userID = shoutboxLI[i].children[1].dataset.userId
+        if(blockedUser.User.findIndex(r => r === userID) != -1) {
+            shoutboxLI[i].innerText = "";
         }
-    });
+    }
 
     const observeShoutbox = new MutationObserver(changes => {
         let newChildrens = changes[0].addedNodes;
@@ -115,7 +112,6 @@ function removeOnlinePage()
         if(!blockedUser) {
             setTimeout(removeOnlinePage, 500);
         } else {
-            //wtf ?!
             let userID = onlinePage[i].firstChild.dataset.userId;
             if(blockedUser.User.findIndex(user => user === userID) != -1)
             {
@@ -131,7 +127,8 @@ function removeOnlinePage()
 function ignoreButton()
 {
     let markedDone = [];
-    const observeToolTop = new MutationObserver(changes => {
+    const observeToolTop = new MutationObserver(changes => 
+    {
         const childrensOfBody = document.body.children;
         
         console.log(childrensOfBody.length);
@@ -183,10 +180,11 @@ function ignoreButton()
     });
 }
 
+/**
+ * @description Removes posts from blocked users
+ */
 function removePost() 
 {   
-    getBlockedUsers().then(r => {
-    BLOCKED = r;
     let blockedUser = BLOCKED;
     let innerContainer = document.querySelector(
         "#top > div.p-body > div > div.uix_contentWrapper > div > div > div > div.block.block--messages > div.block-container.lbContainer"
@@ -201,7 +199,7 @@ function removePost()
             childrenOfInner[i].remove();
         }
     }
-    })
+
 }
 
 
@@ -215,17 +213,22 @@ chrome.storage.sync.get(['key'], function(result) {
 });
 */
 const tabURL = location.href;
-console.log(tabURL)
 if(tabURL === "https://www.panda-community.com/") {
-    ignoreButton();
-    removeOnlinePage();
-    removeStaffPage();
-    watchShoutbox();
+    getBlockedUsers().then(r => {
+        BLOCKED = r;
+        ignoreButton();
+        removeOnlinePage();
+        removeStaffPage();
+        watchShoutbox();
+    })
 } else {
     ignoreButton();
 }
 
 if(tabURL.includes("https://www.panda-community.com/threads/")) {
-    removePost();
+    getBlockedUsers().then(r => {
+        BLOCKED = r;
+        removePost();
+    })
 }
 
