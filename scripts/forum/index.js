@@ -131,7 +131,6 @@ function ignoreButton()
     {
         const childrensOfBody = document.body.children;
         
-        console.log(childrensOfBody.length);
         for (let i = 0; i < childrensOfBody.length; ++i) 
         {
             if (childrensOfBody[i].className == "tooltip tooltip--member tooltip--top") 
@@ -140,7 +139,6 @@ function ignoreButton()
                 
                 if(markedDone.indexOf(specialID) < 0) 
                 {
-                    console.log(childrensOfBody[i]);
                     const toolTip = childrensOfBody[i].children[1].children[0].children[0].children[3]
                     markedDone.push(specialID);
                     
