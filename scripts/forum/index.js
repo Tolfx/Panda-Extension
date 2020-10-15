@@ -235,7 +235,7 @@ if(tabURL === "https://www.panda-community.com/") {
         ignoreButton();
         removeOnlinePage();
         removeStaffPage();
-        watchShoutbox();
+        //watchShoutbox();
     })
 } else {
     ignoreButton();
