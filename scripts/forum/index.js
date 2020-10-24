@@ -299,7 +299,7 @@ function removeLatestProfilePosts()
      * @description The container which holds all of the posts
      */
     let profilePostsContainer = document.querySelector(
-        "#top > div.p-body > div > div > div > div.p-body-sidebar > div.uix_sidebarInner > div > div:nth-child(6) > div > div"
+        "#top > div.p-body > div > div > div > div.p-body-sidebar > div.uix_sidebarInner > div > div:nth-child(5) > div > div"
     )
 
     /**
